@@ -5,10 +5,10 @@ var personGroup;
 
 var gameOver, restart;
 var gameOverImg, restartImg;
-
 var PLAY=1;
 var END=0;
 var gameState = PLAY;
+
 
 
 function preload(){
@@ -51,8 +51,8 @@ function setup() {
 
 function draw() {
     background("white");
-    drawSprites();
 
+    fill("white");
     text("Score: "+score, 525, 50);
 
     if(gameState === PLAY){
@@ -66,14 +66,14 @@ function draw() {
     
     
         if(road.y > 400){
-        road.y = 300
-         
+            road.y = 300
+        }
 
         if(personGroup.isTouching(car)){
             gameState = END;
         }
         spawnPeople();
-       }
+       
     } 
        else if(gameState === END){
         
@@ -93,6 +93,7 @@ function draw() {
        
     
     
+    drawSprites();
 }
     
 
@@ -111,11 +112,12 @@ function reset(){
 function spawnPeople(){
     
     if (frameCount % 60 === 0) {
-      person = createSprite(600, 150, 10 , 40);
-      person.y = Math.round(random(10,60));
-      person.addImage("person.png");
+      person = createSprite(400, -10, 10 , 40);
+      person.x = Math.round(random(70,530));
+      person.addImage(personImg);
+      person.scale = 0.1;
       person.velocityY = 4;
-      person.scale = 0.35;
+
       person.lifetime = 200;
 
       personGroup.add(person);
